@@ -9,7 +9,7 @@ import CourseRoutes from './Kanbas/courses/routes.js'
 import ModuleRoutes from './Kanbas/modules/routes.js'
 import UserRoutes from './users/routes.js'
 
-const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0.1:27017/kanbas'
+const CONNECTION_STRING = process.env.NODE_ENV !== 'development' ? process.env.DB_CONNECTION_STRING : 'mongodb://127.0.0.1:27017/kanbas'
 const PORT = process.env.PORT || 4000;
 
 mongoose.connect(CONNECTION_STRING);
@@ -24,7 +24,7 @@ app.use(
 );
 
 const sessionOptions = {
-  secret: "any string",
+  secret: "secretpassword",
   resave: false,
   saveUninitialized: false,
 };
